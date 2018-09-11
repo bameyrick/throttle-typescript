@@ -1,4 +1,4 @@
-#throttle-typescript
+# throttle-typescript
 
 ## Install
 You can install via npm or yarn.
