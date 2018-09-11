@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"moduleResolution": "node",
+		"module": "commonjs",
+		"target": "ES5",
+		"sourceMap": false,
+		"experimentalDecorators": true,
+		"noImplicitAny": false,
+		"noImplicitThis": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"strictNullChecks": true,
+		"declaration": true,
+		"lib": ["es2017.object", "es2015", "es2017", "dom"]
+	},
+	"exclude": ["node_modules", "dist/", "tests/"]
+}
