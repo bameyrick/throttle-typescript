@@ -6,16 +6,15 @@ end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = false
 insert_final_newline = true
-indent_style = tab
-[{*.yml,*.json}]
 indent_style = space
+[{*.yml,*.json}]
 indent_size = 2
 # Sass
-[*.scss]
+[{*.scss, *.sass}]
 indent_size = 2
 # Javascript + derivatives
 [{*.coffee,*.js,*.ts}]
 indent_size = 2
-# Jade templates
-[*.pug, *.jade]
-indent_size = 2
+# Templates
+[*.pug,*.jade,*.njk]
+indent_size = 4
