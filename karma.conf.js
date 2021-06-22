@@ -1,37 +1,53 @@
-module.exports = function(config) {
-	config.set({
-		frameworks: ['jasmine', 'karma-typescript'],
+const process = require('process');
+process.env.CHROME_BIN = require('puppeteer').executablePath();
 
-		files: ['tests/**/*.ts', 'src/**/*.ts'],
+// eslint-disable-next-line
+module.exports = function (config) {
+  config.set({
+    frameworks: ['jasmine', 'karma-typescript'],
 
-		preprocessors: {
-			'tests/**/*.ts': 'karma-typescript',
-			'src/**/*.ts': 'karma-typescript',
-		},
+    files: ['tests/**/*.ts', 'src/**/*.ts'],
 
-		plugins: [
-			require('karma-jasmine'),
-			require('karma-chrome-launcher'),
-			require('karma-jasmine-html-reporter'),
-			require('karma-coverage-istanbul-reporter'),
-			require('karma-typescript'),
-		],
+    preprocessors: {
+      'tests/**/*.ts': 'karma-typescript',
+      'src/**/*.ts': 'karma-typescript',
+    },
 
-		client: {
-			clearContext: false, // leave Jasmine Spec Runner output visible in browser
-		},
+    plugins: [
+      require('karma-jasmine'),
+      require('karma-chrome-launcher'),
+      require('karma-coverage-istanbul-reporter'),
+      require('karma-typescript'),
+    ],
 
-		coverageIstanbulReporter: {
-			reports: ['html', 'karma-typescript', 'lcovonly'],
-			fixWebpackSourcePaths: true,
-		},
+    client: {
+      clearContext: false, // leave Jasmine Spec Runner output visible in browser
+    },
 
-		reporters: ['progress', 'kjhtml'],
-		port: 9876,
-		colors: true,
-		logLevel: config.LOG_INFO,
-		autoWatch: true,
-		browsers: ['Chrome'],
-		singleRun: process.env.KARMA_SINGLE_RUN !== 'false',
-	});
+    coverageIstanbulReporter: {
+      reports: ['text', 'lcovonly'],
+      fixWebpackSourcePaths: true,
+      dir: 'coverage',
+    },
+
+    karmaTypescriptConfig: {
+      bundlerOptions: {
+        transforms: [require('karma-typescript-es6-transform')()],
+      },
+    },
+
+    reporters: ['progress', 'coverage-istanbul'],
+    port: 9876,
+    colors: true,
+    logLevel: config.LOG_INFO,
+    autoWatch: true,
+    browsers: ['ChromeHeadlessNoSandbox'],
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox', '--headless', '--disable-gpu', '--disable-translate', '--disable-extensions'],
+      },
+    },
+    singleRun: process.env.KARMA_SINGLE_RUN !== 'false',
+  });
 };
