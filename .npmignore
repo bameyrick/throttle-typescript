@@ -1,12 +1,5 @@
-*.log
-.DS_Store
-Thumbs.db
-node_modules/
-src/
-tests/
-.babelrc
-.editorconfig
-.gitignore
-karma.conf.json
-tsconfig.json
-tslint.json
+*
+!/dist/**/*
+!/LICENSE
+!/package.json
+!/yarn.lock
