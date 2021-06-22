@@ -18,12 +18,12 @@
   ],
   "license": "MIT",
   "scripts": {
+    "build": "yarn lint && tsc -p tsconfig.json --outDir dist/",
     "lint": "tslint src/*.ts",
     "test": "KARMA_SINGLE_RUN=false karma start ./karma.conf.js",
     "test-single": "yarn tidy-clean && yarn lint && yarn karma start ./karma.conf.js",
     "lint-staged": "lint-staged",
     "precommit": "lint-staged",
-    "prepublishOnly": "rm -rf ./dist && yarn run lint && karma start ./karma.conf.js  && tsc -p ./ --outDir dist/",
     "postcommit": "yarn run prepublishOnly",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "tidy-clean": "rm -rf dist coverage"
