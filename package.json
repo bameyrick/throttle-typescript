@@ -32,16 +32,13 @@
     "*.ts": [
       "tslint src/*.ts",
       "karma start ./karma.conf.js",
-      "prettier --print-width 140 --use-tabs --single-quote --trailing-comma es5 --parser typescript --write",
-      "git add"
+      "prettier --print-width 140 --use-tabs --single-quote --trailing-comma es5 --parser typescript --write"
     ],
     "*.json": [
-      "prettier --print-width 140 --use-tabs --single-quote --trailing-comma es5 --parser json --write",
-      "git add"
+      "prettier --print-width 140 --use-tabs --single-quote --trailing-comma es5 --parser json --write"
     ],
     "*.js": [
-      "prettier --print-width 140 --use-tabs --single-quote --trailing-comma es5 --parser babylon --write",
-      "git add"
+      "prettier --print-width 140 --use-tabs --single-quote --trailing-comma es5 --parser babylon --write"
     ]
   },
   "husky": {
