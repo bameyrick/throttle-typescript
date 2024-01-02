@@ -1,0 +1,37 @@
+name: Publish to NPM
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository 🛒
+        uses: actions/checkout@v3
+
+      - name: Set node version 🤖
+        run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_OUTPUT
+        id: nvm
+
+      - name: Set up Node.js ${{ steps.nvm.outputs.NODE_VERSION }} 🤖
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies 🌀
+        run: npm install
+
+      - name: Build 👷🏼‍♂️
+        run: npm run build
+
+      - name: Set details 👨🏻‍💻
+        run: git config --global user.email "bameyrick@gmail.com" && git config --global user.name "Ben Meyrick"
+
+      - name: Publish package on NPM 📦
+        run: npm version ${{github.ref_name}} --allow-same-version --allow-empty --no-git-tag-version && npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
